@@ -1,6 +1,6 @@
-public class Fibonacci_Endregression {
+public class Fibonacci_Endrekursion {
     public static void main(String[] args) {
-        System.out.println(fib1(8));
+        System.out.println(fib1(20));
     }
     public static int fib1(int n){
         return fib2(n-1, 1, 0);
