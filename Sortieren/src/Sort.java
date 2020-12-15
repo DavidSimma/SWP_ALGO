@@ -18,13 +18,18 @@ public class Sort {
         list.put("geordnet", orderedArray);
         list.put("verkehrt geordnet", reversedArray);
         list.put("ungeordnet", randomArray);
-
+        
         System.out.println("Insertionsort: ");
         for(int[] i : list.values()){
             long start = System.nanoTime();
             insertionsort(i);
             long end = System.nanoTime();
             System.out.println("Das Sortieren der Liste: " + getKey(list, i) + " hat "+ (end-start) + " Nanosekunden gedauert");
+        }
+        createList(orderedArray, reversedArray, randomArray, lenght);
+
+        for(int i : reversedArray){
+            System.out.println(i);
         }
 
         System.out.println("Bubblesort: ");
@@ -53,7 +58,7 @@ public class Sort {
         int[] tempArray = new int[lenght];
 
 
-        for(int i = 0; i < orderedArray.length; i++) {
+        for(int i = 0; i < randomArray.length; i++) {
             orderedArray[i] = i;
             tempArray[i] = i;
         }
@@ -66,9 +71,10 @@ public class Sort {
             tempArray[tempArray.length-i-1] = tempArray[temp2];
             tempArray[temp2] = temp;
         }
-
+        int count=0;
         for(int i = reversedArray.length-1; i >= 0 ; i--) {
-            reversedArray[i] = i;
+            reversedArray[count] = i;
+            count++;
         }
     }
     static void insertionsort(int array[])
