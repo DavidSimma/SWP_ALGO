@@ -87,7 +87,6 @@ public class Sort {
             for (int j = i - 1; j >= insertedPosition; --j) {
                 array[j + 1] = array[j];
             }
-
             array[insertedPosition] = key;
         }
     }
