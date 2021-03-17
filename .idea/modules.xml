@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Regression/Regression.iml" filepath="$PROJECT_DIR$/Regression/Regression.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SWP_ALGO.iml" filepath="$PROJECT_DIR$/.idea/SWP_ALGO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sortieren/Sortieren.iml" filepath="$PROJECT_DIR$/Sortieren/Sortieren.iml" />
+    </modules>
+  </component>
+</project>
