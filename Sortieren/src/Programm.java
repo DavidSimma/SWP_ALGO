@@ -8,6 +8,7 @@ public class Programm {
     public static List<List<Integer>> allLists2 = new ArrayList<>();
     public static List<List<Integer>> allLists3 = new ArrayList<>();
     public static List<List<Integer>> allLists4 = new ArrayList<>();
+    public static List<List<Integer>> allLists5 = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -33,7 +34,7 @@ public class Programm {
         System.out.println("Insertionsort: ");
         for(int[] i : list.values()){
             long start = System.nanoTime();
-            Sort_Algorithms.binaryInsertionSort(i);
+            Sort_Algorythm.binaryInsertionSort(i);
             long end = System.nanoTime();
             System.out.println("Das Sortieren der Liste: " + getKey(list, i) + " hat "+ (end-start) + " Nanosekunden gedauert");
         }
@@ -46,10 +47,44 @@ public class Programm {
         System.out.println("Bubblesort: ");
         for(int[] i : list.values()){
             long start = System.nanoTime();
-            Sort_Algorithms.bubbleSort(i);
+            Sort_Algorythm.bubbleSort(i);
             long end = System.nanoTime();
             System.out.println("Das Sortieren der Liste: " + getKey(list, i) + " hat "+ (end-start) + " Nanosekunden gedauert");
         }
+    }
+
+    public static void createSourceList(int listenLänge, int listenBound){
+        Random rnd = new Random();
+        for(int i = 0; i < 100; i++){
+            List<Integer> temp = new ArrayList<>();
+            int o=0;
+            while(o<listenLänge){
+                temp.add(rnd.nextInt(listenBound));
+                o++;
+            }
+
+            sourceList.add(temp);
+        }
+    }
+
+    public static void deepCopyLists(){
+        for(List<Integer> in : sourceList){
+            allLists.add(new ArrayList<>());
+            allLists2.add(new ArrayList<>());
+            allLists3.add(new ArrayList<>());
+            allLists4.add(new ArrayList<>());
+            allLists5.add(new ArrayList<>());
+        }
+        for(List<Integer> in : sourceList){
+            for (int i =0; i< in.size();i++){
+            allLists.get(i).add(in.get(i));
+            allLists2.get(i).add(in.get(i));
+            allLists3.get(i).add(in.get(i));
+            allLists4.get(i).add(in.get(i));
+            allLists5.get(i).add(in.get(i));
+            }
+        }
+
     }
 
     public static void schrittVergleich(){
@@ -58,29 +93,10 @@ public class Programm {
         listenLänge = reader.nextInt();
         System.out.print("Listenbound: ");
         listenBound = reader.nextInt();
-        Random rnd = new Random();
-        for(int i = 0; i <= 100; i++){
-            List<Integer> temp = new ArrayList<>();
 
-            while(i<=listenLänge){
-                temp.add(rnd.nextInt(listenBound));
-                i++;
-            }
+        createSourceList(listenLänge, listenBound);
 
-            sourceList.add(temp);
-        }
-        for (int o = 0; o < sourceList.size(); o++){
-            allLists.add(new ArrayList<>());
-            allLists2.add(new ArrayList<>());
-            allLists3.add(new ArrayList<>());
-            allLists4.add(new ArrayList<>());
-            for (int in : sourceList.get(o)){
-                allLists.get(o).add(Integer.valueOf(in));
-                allLists2.get(o).add(Integer.valueOf(in));
-                allLists3.get(o).add(Integer.valueOf(in));
-                allLists4.get(o).add(Integer.valueOf(in));
-            }
-        }
+        deepCopyLists();
 
         List<Integer> bubbleCount = new ArrayList<>();
         List<Integer> bubbleCount2 = new ArrayList<>();
@@ -90,51 +106,61 @@ public class Programm {
         List<Integer> stableSelectionCount2 = new ArrayList<>();
         List<Integer> insertionCount = new ArrayList<>();
         List<Integer> insertionCount2 = new ArrayList<>();
+        List<Integer> quickCount = new ArrayList<>();
+        List<Integer> quickCount2 = new ArrayList<>();
         List<Long> time1 = new ArrayList<>();
         List<Long> time2 = new ArrayList<>();
         List<Long> time3 = new ArrayList<>();
         List<Long> time4 = new ArrayList<>();
-
-
+        List<Long> time5 = new ArrayList<>();
 
         for (int o = 0; o< allLists.size(); o++){
+
+
             long start1 = System.nanoTime();
-            Sort_Algorithms.bubbleSort(allLists.get(o));
+            Sort_Algorythm.bubbleSort(allLists.get(o));
             long end1 = System.nanoTime();
-            bubbleCount.add(Sort_Algorithms.countVertausch.get("bubble_List"));
-            bubbleCount2.add(Sort_Algorithms.countVergleich.get("bubble_List"));
+            bubbleCount.add(Sort_Algorythm.countVertausch.get("bubble_List"));
+            bubbleCount2.add(Sort_Algorythm.countVergleich.get("bubble_List"));
             time1.add(end1-start1);
 
             long start2 = System.nanoTime();
-            Sort_Algorithms.selectionsort(allLists2.get(o));
+            Sort_Algorythm.selectionsort(allLists2.get(o));
             long end2 = System.nanoTime();
-            selectionCount.add(Sort_Algorithms.countVertausch.get("selection_List"));
-            selectionCount2.add(Sort_Algorithms.countVergleich.get("selection_List"));
+            selectionCount.add(Sort_Algorythm.countVertausch.get("selection_List"));
+            selectionCount2.add(Sort_Algorythm.countVergleich.get("selection_List"));
             time2.add(end2-start2);
 
             long start3 = System.nanoTime();
-            Sort_Algorithms.stableSelectionSort(allLists3.get(o));
+            Sort_Algorythm.stableSelectionSort(allLists3.get(o));
             long end3 = System.nanoTime();
-            stableSelectionCount.add(Sort_Algorithms.countVertausch.get("stableSelection_List"));
-            stableSelectionCount2.add(Sort_Algorithms.countVergleich.get("stableSelection_List"));
+            stableSelectionCount.add(Sort_Algorythm.countVertausch.get("stableSelection_List"));
+            stableSelectionCount2.add(Sort_Algorythm.countVergleich.get("stableSelection_List"));
             time3.add(end3-start3);
 
             long start4 = System.nanoTime();
-            Sort_Algorithms.binaryInsertionSort(allLists4.get(o));
+            Sort_Algorythm.binaryInsertionSort(allLists4.get(o));
             long end4 = System.nanoTime();
-            insertionCount.add(Sort_Algorithms.countVertausch.get("insertion_List"));
-            insertionCount2.add(Sort_Algorithms.countVergleich.get("insertion_List"));
+            insertionCount.add(Sort_Algorythm.countVertausch.get("insertion_List"));
+            insertionCount2.add(Sort_Algorythm.countVergleich.get("insertion_List"));
             time4.add(end4-start4);
 
+            long start5 = System.nanoTime();
+            Sort_Algorythm.quickSort(allLists5.get(o), 0, allLists5.size()-1);
+            long end5 = System.nanoTime();
+            quickCount.add(Sort_Algorythm.countVertausch.get("quick_List"));
+            quickCount2.add(Sort_Algorythm.countVergleich.get("quick_List"));
+            time5.add(end5-start5);
 
-            Sort_Algorithms.countVertausch.clear();
-            Sort_Algorithms.countVergleich.clear();
+
+            Sort_Algorythm.countVertausch.clear();
+            Sort_Algorythm.countVergleich.clear();
 
         }
 
-        int allcounts=0, allcounts2=0, allcounts3=0, allcounts4=0;
-        int all2counts=0, all2counts2=0, all2counts3=0, all2counts4=0;
-        long alltime1=0, alltime2=0, alltime3=0, alltime4=0;
+        int allcounts=0, allcounts2=0, allcounts3=0, allcounts4=0, allcounts5=0;
+        int all2counts=0, all2counts2=0, all2counts3=0, all2counts4=0, all2counts5=0;
+        long alltime1=0, alltime2=0, alltime3=0, alltime4=0, alltime5=0;
 
         for (int j = 0; j<bubbleCount.size(); j++){
             allcounts += bubbleCount.get(j);
@@ -145,34 +171,51 @@ public class Programm {
             all2counts3 += stableSelectionCount2.get(j);
             allcounts4 += insertionCount.get(j);
             all2counts4 += insertionCount2.get(j);
+            allcounts5 += quickCount.get(j);
+            all2counts5 += quickCount2.get(j);
             alltime1 += time1.get(j);
             alltime2 += time2.get(j);
             alltime3 += time3.get(j);
             alltime4 += time4.get(j);
+            alltime5 += time5.get(j);
 
         }
 
         System.out.println("Statistiken: ");
+
+        System.out.println("\nBubblesort");
         System.out.println("Durchschnittliche Vergleichs-Operationen - Bubblesort: " + allcounts/bubbleCount.size());
         System.out.println("Durchschnittliche Vertausch-Operationen - Bubblesort: " + all2counts/bubbleCount2.size());
         System.out.println("Median - Bubblesort: " + bubbleCount2.get(bubbleCount2.size()/2));
         System.out.println("Durchschnittliche Zeit (Nanosekunden) - Bubblesort: " + alltime1/time1.size());
+
+        System.out.println("\nSelectionsort");
         System.out.println("Durchschnittliche Vergleichs-Operationen - Selectionsort: " + allcounts2/selectionCount.size());
         System.out.println("Durchschnittliche Vertausch-Operationen - Selectionsort: " + all2counts2/selectionCount2.size());
         System.out.println("Median - Selectionsort: " + selectionCount2.get(selectionCount2.size()/2));
         System.out.println("Durchschnittliche Zeit (Nanosekunden) - Selectionsort: " + alltime2/time2.size());
+
+        System.out.println("\nStable Selectionsort");
         System.out.println("Durchschnittliche Vergleichs-Operationen - Stable Selectionsort: " + allcounts3/stableSelectionCount.size());
         System.out.println("Durchschnittliche Vertausch-Operationen - Stable Selectionsort: " + all2counts3/stableSelectionCount2.size());
         System.out.println("Median - Stable Selectionsort: " + stableSelectionCount2.get(stableSelectionCount2.size()/2));
         System.out.println("Durchschnittliche Zeit (Nanosekunden) - Stable Selectionsort: " + alltime3/time3.size());
+
+        System.out.println("\nInsertionsort");
         System.out.println("Durchschnittliche Vergleichs-Operationen - Insertionsort: " + allcounts4/insertionCount.size());
         System.out.println("Durchschnittliche Vertausch-Operationen - Insertionsort: " + all2counts4/insertionCount2.size());
         System.out.println("Median - Insertionsort: " + insertionCount2.get(insertionCount2.size()/2));
         System.out.println("Durchschnittliche Zeit (Nanosekunden) - Insertionsort: " + alltime4/time4.size());
+
+        System.out.println("\nQuicksort");
+        System.out.println("Durchschnittliche Vergleichs-Operationen - Quicksort: " + allcounts5/quickCount.size());
+        System.out.println("Durchschnittliche Vertausch-Operationen - Quicksort: " + all2counts5/quickCount2.size());
+        System.out.println("Median - Quicksort: " + quickCount2.get(quickCount2.size()/2));
+        System.out.println("Durchschnittliche Zeit (Nanosekunden) - Quicksort: " + alltime5/time5.size());
+
+        System.out.println();
         System.out.println("Länge der Listen: " + listenLänge);
         System.out.println("Bound jeder Liste: " + listenBound);
-
-
     }
 
 
